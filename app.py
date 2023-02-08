@@ -8,17 +8,22 @@ from io import StringIO, BytesIO
 st.set_page_config(page_title='Excel Plotter')
 st.title('Excel Render Graph')
 
-user = """
-<form>
-<input type="text" name="name" placeholder="First Name" required>
-<input type="text" name="last name" placeholder="Last Name" required>
-<input type="text" name="DOB" placeholder="Date of Birth" required>
-
+user_information = """
+    <form>
+        <input type="text" name="name" placeholder="First Name" required>
+        <input type="text" name="last name" placeholder="Last Name" required>
+        <input type="text" name="DOB" placeholder="Date of Birth" required>
+    </form>
 """
 
 
-st.markdown(user, unsafe_allow_html=True)
+st.markdown(user_information, unsafe_allow_html=True)
 
+def css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+css('style.css')
 
 st.subheader('Choose your excel file below')
 

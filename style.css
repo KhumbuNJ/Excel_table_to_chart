@@ -1,0 +1,11 @@
+
+input[type=text], select, textarea{
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px; 
+    background-color: rgb(164, 219, 221);
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    resize: vertical;
+}
