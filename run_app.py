@@ -1,8 +1,6 @@
 import streamlit as st 
 import pandas as pd  
 import plotly.express as px  
-import base64  
-from io import StringIO, BytesIO  
 
 
 st.set_page_config(page_title='Excel Plotter')
@@ -16,17 +14,20 @@ user_information = """
     </form>
 """
 
-
 st.markdown(user_information, unsafe_allow_html=True)
 
+
+#opening, reading a css document that styles the user information form
 def css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+#calling the css function
 css('style.css')
 
 st.subheader('Choose your excel file below')
 
+#upload file
 uploaded_file = st.file_uploader('Choose excel file', type='xlsx')
 if uploaded_file:
     st.markdown('---')
@@ -37,11 +38,11 @@ if uploaded_file:
         ('Expense', 'Expense'),
     )
 
-    # Group df
+    # group df
     columns = ['Income', 'Expense']
     df_grouped = df.groupby(by=[group_by_column], as_index=False)[columns].sum()
 
-    # -- Plot df
+    # plot df
     plot_elements = px.bar(
         df_grouped,
         x = group_by_column,
@@ -52,4 +53,9 @@ if uploaded_file:
         title = f'Income and Expenses'
     )
     st.plotly_chart(plot_elements)
+
+
+
+
+
 
