@@ -27,29 +27,29 @@ css('style.css')
 
 st.subheader('Choose your excel file below')
 
-uploaded_file = st.file_uploader('Choose a XLSX file', type='xlsx')
+uploaded_file = st.file_uploader('Choose excel file', type='xlsx')
 if uploaded_file:
     st.markdown('---')
     df = pd.read_excel(uploaded_file, engine='openpyxl')
     st.dataframe(df)
-    groupby_column = st.selectbox(
+    group_by_column = st.selectbox(
         'Financial Income and Expense',
         ('Expense', 'Expense'),
     )
 
     # Group df
-    output_columns = ['Income', 'Expense']
-    df_grouped = df.groupby(by=[groupby_column], as_index=False)[output_columns].sum()
+    columns = ['Income', 'Expense']
+    df_grouped = df.groupby(by=[group_by_column], as_index=False)[columns].sum()
 
     # -- Plot df
-    fig = px.bar(
+    plot_elements = px.bar(
         df_grouped,
-        x=groupby_column,
-        y='Income',
-        color='Expense',
-        color_continuous_scale=['red', 'yellow'],
-        template='plotly_white',
-        title=f'Income and Expenses'
+        x = group_by_column,
+        y = 'Income',
+        color = 'Expense',
+        color_continuous_scale = ['green', 'blue', 'red'],
+        template = 'plotly_white',
+        title = f'Income and Expenses'
     )
-    st.plotly_chart(fig)
+    st.plotly_chart(plot_elements)
 
